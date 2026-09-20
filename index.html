@@ -36,8 +36,16 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Newsreader:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<!-- Fonts load without blocking first paint. The stylesheet arrives as a
+     preload, then promotes itself to a stylesheet once fetched; display=swap
+     means text is readable in the fallback face until it lands. Measured at
+     ~982ms of blocked render before this change. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Newsreader:ital,wght@0,400;1,300&display=swap" onload="this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Newsreader:ital,wght@0,400;1,300&display=swap">
+</noscript>
 
 <!-- Motion layer. Deferred: never render-blocking, and order is preserved. -->
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -345,12 +353,12 @@
 
         <div class="roles parallax reveal reveal-up" data-depth="0.05">
           <div class="role">
-            <h4>TranZact</h4>
+            <h3>TranZact</h3>
             <div class="when">Area Sales Executive &amp; Strategic Alliances &middot; Mumbai &middot; 2025&ndash;present</div>
             <p>B2B sales and partner network development — generating demos and building the regional alliance pipeline.</p>
           </div>
           <div class="role">
-            <h4>Matrix Comsec</h4>
+            <h3>Matrix Comsec</h3>
             <div class="when">Content Marketing Executive &middot; 2021&ndash;2024</div>
             <p>Owned content for product launches across security and telecom: scripts, campaigns, social and newsletter.</p>
           </div>

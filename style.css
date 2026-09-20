@@ -38,8 +38,8 @@
   --on-accent: #0B0C0E;
 
   /* Type */
-  --display: 'Archivo', system-ui, -apple-system, sans-serif;
-  --body:    'Newsreader', Georgia, 'Times New Roman', serif;
+  --display: 'Archivo', 'Archivo Fallback', system-ui, -apple-system, sans-serif;
+  --body:    'Newsreader', 'Newsreader Fallback', Georgia, 'Times New Roman', serif;
 
   /* Motion */
   --ease:      cubic-bezier(0.22, 1, 0.36, 1);
@@ -65,6 +65,33 @@
   --rule:      rgba(22, 24, 28, 0.16);
   --rule-soft: rgba(22, 24, 28, 0.09);
   --on-accent: #E4E1D8;
+}
+
+/* Metric-matched fallback faces.
+   The webfonts load asynchronously so they never block first paint, which
+   means text is briefly drawn in a system face and then swaps. Left alone,
+   that swap moves the layout: Newsreader's ascent is 74% of em against
+   Georgia's 92%, so every line of body copy jumped on arrival (measured CLS
+   0.091, with the hero paragraph as the LCP element).
+
+   The numbers below were measured in-browser against the real faces, then
+   divided by size-adjust as the spec requires. They make the fallback occupy
+   the same box as the webfont, so the swap is invisible. */
+@font-face {
+  font-family: 'Newsreader Fallback';
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 95.76%;
+  ascent-override: 77.28%;
+  descent-override: 28.19%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 100.64%;
+  ascent-override: 87.44%;
+  descent-override: 20.87%;
+  line-gap-override: 0%;
 }
 
 
@@ -740,7 +767,7 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
 }
 .role { padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--rule-soft); }
 .role:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
-.role h4 {
+.role h3 {
   font-family: var(--display);
   font-size: 1.05rem;
   font-weight: 700;

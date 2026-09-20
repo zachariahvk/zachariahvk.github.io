@@ -122,13 +122,15 @@
       onComplete: function () { el.remove(); heroIn(); }
     });
 
+    // Kept deliberately short. Every millisecond here is a millisecond the
+    // visitor spends looking at a holding screen instead of the work.
     tl.fromTo(el.querySelector('span'),
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.5, ease: EASE })
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.34, ease: EASE })
       .to(el.querySelector('span'),
-        { opacity: 0, duration: 0.3, ease: 'power2.in' }, '+=0.25')
+        { opacity: 0, duration: 0.22, ease: 'power2.in' }, '+=0.12')
       .to(el,
-        { yPercent: -100, duration: 0.8, ease: EASE }, '-=0.1');
+        { yPercent: -100, duration: 0.6, ease: EASE }, '-=0.08');
   })();
 
   // Cursor follower — fine pointers only
@@ -176,6 +178,11 @@
   function heroIn() {
     var tl = gsap.timeline();
 
+    // The nav comes in first, at position 0. It used to animate near the end
+    // of this timeline, which left the site's navigation invisible for over
+    // two seconds after load — an audit caught it at 1.02:1 contrast.
+    tl.from('.topbar', { opacity: 0, y: -14, duration: 0.6, ease: EASE }, 0);
+
     tl.from('.hero .line-mask > span', {
         yPercent: 108,
         duration: 1.0,
@@ -187,7 +194,6 @@
       .from('.hero .quickcontact .btn', {
         opacity: 0, y: 14, duration: 0.7, ease: EASE, stagger: 0.07
       }, '-=0.55')
-      .from('.topbar', { opacity: 0, y: -14, duration: 0.7, ease: EASE }, '-=0.7')
       .from('.scroll-cue', { opacity: 0, duration: 0.6, ease: EASE }, '-=0.4');
   }
 
