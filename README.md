@@ -2,7 +2,7 @@
 
 Content marketing portfolio. Single-page static site, no build step, no dependencies.
 
-**Live:** __SITE_URL__
+**Live:** https://zachariahvk.github.io/
 
 ## Files
 
