@@ -291,6 +291,9 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
   font-size: 15px;
   letter-spacing: -0.01em;
   color: var(--text);
+  white-space: nowrap;   /* never let the name break across two lines */
+  flex: none;
+  padding: 6px 0;        /* lifts the tap target to the 24px minimum */
 }
 
 .topbar nav {
@@ -552,6 +555,8 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
   font-weight: 500;
   color: var(--accent);
   letter-spacing: 0.04em;
+  white-space: nowrap;   /* "3 films" should never break in two */
+  flex: none;
 }
 
 .cards {
@@ -881,7 +886,7 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
   color: var(--text-dim);
   background: none;
   border: 0;
-  padding: 0;
+  padding: 8px 0;        /* 24px minimum tap target */
   cursor: pointer;
   transition: color var(--dur-fast) var(--ease);
 }
@@ -933,8 +938,13 @@ html.js .reveal-fade { transform: none; }
   .pagefoot .wrap { flex-direction: column; align-items: flex-start; }
 }
 
-@media (max-width: 400px) {
-  .topbar nav a[href="#about"] { display: none; }
+/* Squeeze the bar rather than dropping a nav item — losing "About" on small
+   screens removes a real destination, which is worse than tighter spacing. */
+@media (max-width: 430px) {
+  .topbar { padding-left: 16px; padding-right: 16px; }
+  .topbar .mark { font-size: 12.5px; }
+  .topbar nav a { padding: 6px 6px; font-size: 12.5px; }
+  .theme-toggle { width: 30px; height: 30px; margin-left: 2px; }
 }
 
 
