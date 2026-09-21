@@ -183,6 +183,10 @@
     // two seconds after load — an audit caught it at 1.02:1 contrast.
     tl.from('.topbar', { opacity: 0, y: -14, duration: 0.6, ease: EASE }, 0);
 
+    // Availability line arrives with the nav — it is information, not garnish,
+    // so it should never be the last thing to appear.
+    tl.from('.hero .status', { opacity: 0, y: 10, duration: 0.6, ease: EASE }, 0.05);
+
     tl.from('.hero .line-mask > span', {
         yPercent: 108,
         duration: 1.0,
@@ -191,7 +195,7 @@
       })
       .from('.hero .line', { opacity: 0, y: 18, duration: 0.8, ease: EASE }, '-=0.55')
       .from('.hero .blurb', { opacity: 0, y: 18, duration: 0.8, ease: EASE }, '-=0.6')
-      .from('.hero .quickcontact .btn', {
+      .from('.hero .quickcontact .btn, .hero .alt-contact', {
         opacity: 0, y: 14, duration: 0.7, ease: EASE, stagger: 0.07
       }, '-=0.55')
       .from('.scroll-cue', { opacity: 0, duration: 0.6, ease: EASE }, '-=0.4');

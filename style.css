@@ -33,6 +33,7 @@
   --text-dim:  #7D818A;   /*  5.01:1 — still AA, so it can carry real text   */
   --accent:    #6E8BFF;   /*  6.34:1 — their #1E36C8 opened up for dark      */
   --accent-deep: #1E36C8; /* original brand blue, kept for light mode        */
+  --ok:        #3DD68C;   /* availability dot only — decorative, never text  */
   --rule:      rgba(242, 240, 234, 0.10);
   --rule-soft: rgba(242, 240, 234, 0.06);
   --on-accent: #0B0C0E;
@@ -62,6 +63,7 @@
   --text-mid:  #4A4E55;
   --text-dim:  #6E7279;
   --accent:    #1E36C8;
+  --ok:        #178A55;
   --rule:      rgba(22, 24, 28, 0.16);
   --rule-soft: rgba(22, 24, 28, 0.09);
   --on-accent: #E4E1D8;
@@ -155,6 +157,10 @@ a { color: var(--accent); text-decoration: none; }
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* Any component that sets its own `display` (e.g. .btn is inline-block) would
+   otherwise override the browser's default [hidden] rule and show anyway. */
+[hidden] { display: none !important; }
 
 
 /* 3. Layout ================================================================ */
@@ -458,6 +464,44 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
 
 .hero .wrap { position: relative; z-index: 2; }
 
+/* Availability line. The green dot is decorative — the words carry the
+   meaning, so it passes for colour-blind readers and screen readers alike. */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 30px;
+  padding: 7px 15px 7px 12px;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-mid);
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.status-dot {
+  position: relative;
+  flex: none;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+/* Soft ping — transform + opacity only. */
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--ok);
+  animation: ping 2.4s var(--ease) infinite;
+}
+@keyframes ping {
+  0%       { transform: scale(1);   opacity: 0.55; }
+  80%, to  { transform: scale(2.8); opacity: 0; }
+}
+
 .hero h1 {
   font-family: var(--display);
   font-weight: 900;
@@ -526,6 +570,35 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
   border-color: var(--text);
   color: var(--bg);
 }
+
+/* Secondary contact routes — present, but visibly not the main ask. */
+.alt-contact {
+  align-self: center;
+  margin-left: 8px;
+  font-family: var(--display);
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.alt-contact a {
+  position: relative;
+  display: inline-block;
+  padding: 5px 0;            /* comfortable tap target without looking like a button */
+  color: var(--text-mid);
+  transition: color var(--dur-fast) var(--ease);
+}
+.alt-contact a:hover { color: var(--accent); }
+.alt-contact a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--dur-fast) var(--ease);
+}
+.alt-contact a:hover::after,
+.alt-contact a:focus-visible::after { transform: scaleX(1); }
 
 /* Scroll cue */
 .scroll-cue {

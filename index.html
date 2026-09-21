@@ -84,6 +84,10 @@
     <div class="mesh" aria-hidden="true"><i></i><i></i><i></i></div>
 
     <div class="wrap">
+      <!-- Availability. For a hiring manager this is the most useful sentence on
+           the page, so it sits above the headline instead of at the end of About. -->
+      <p class="status"><span class="status-dot" aria-hidden="true"></span>Open to content marketing roles</p>
+
       <h1>
         <span class="line-mask"><span>Content that</span></span>
         <span class="line-mask"><span>moves product.</span></span>
@@ -98,10 +102,20 @@
         <strong>TranZact</strong> in Mumbai. The work below is from the marketing side.
       </p>
 
+      <!-- One primary action. LinkedIn and phone stay, but as quieter links, so
+           the visitor is not asked to choose between three equal buttons. -->
       <div class="quickcontact">
         <a class="btn primary magnetic" href="mailto:kurienzach30@gmail.com">Email me</a>
-        <a class="btn magnetic" href="https://www.linkedin.com/in/zachariahvk/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn magnetic" href="tel:+919537774659">+91 95377 74659</a>
+
+        <!-- CV: set href to your Drive/Dropbox share link, then delete `hidden`.
+             Hidden until then so this branch can never ship a button to nowhere. -->
+        <a class="btn magnetic cv-link" href="#" target="_blank" rel="noopener" hidden>Download CV<span class="visually-hidden"> (opens in a new tab)</span></a>
+
+        <span class="alt-contact">
+          or <a href="https://www.linkedin.com/in/zachariahvk/" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+          <span aria-hidden="true">&middot;</span>
+          <a href="tel:+919537774659">+91 95377 74659</a>
+        </span>
       </div>
     </div>
 
