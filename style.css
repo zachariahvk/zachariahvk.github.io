@@ -9,6 +9,7 @@
      4.  Page chrome (progress bar, cursor, intro)
      5.  Top bar
      6.  Hero + ambient background
+     6b. Proof strip
      7.  Work
      8.  About
      9.  Contact
@@ -627,6 +628,66 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
 @keyframes cue {
   0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
   50%      { transform: scaleY(1);   opacity: 1; }
+}
+
+
+/* 6b. Proof strip ========================================================== */
+
+/* A compact band, not a full section — it should read in one glance on the
+   way from the headline to the work. Numbers are static on purpose: a
+   count-up would animate text, which breaks the transform/opacity rule. */
+.proof {
+  padding: clamp(34px, 5vw, 50px) 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+}
+
+.proof-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* minmax(0, 1fr), not 1fr: plain 1fr lets the widest word ("Awarded") grow
+     its column, which left the grid lopsided (83px vs 137px) on small phones. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.proof-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 20px;
+  border-left: 1px solid var(--rule);
+}
+.proof-list li:first-child { border-left-color: var(--accent); }
+
+.proof-num {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.proof-label {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-mid);
+  max-width: 24ch;
+}
+
+@media (max-width: 860px) {
+  .proof-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 18px; }
+}
+
+/* With columns now fixed-equal, the longest figure has to fit its share. */
+@media (max-width: 400px) {
+  .proof-list li { padding-left: 16px; }
+  .proof-num { font-size: clamp(1.45rem, 7.2vw, 1.9rem); }
 }
 
 
