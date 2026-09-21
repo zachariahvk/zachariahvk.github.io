@@ -25,7 +25,8 @@
 /* 1. Tokens ================================================================ */
 
 :root {
-  /* Dark is the default direction. Every pair below is measured AA (>=4.5:1). */
+  /* Dark is the default direction. Every text pair in BOTH themes is measured
+     AA (>=4.5:1) — check the light block too when changing a colour. */
   --bg:        #0B0C0E;   /* page                                            */
   --surface:   #14161A;   /* cards                                           */
   --surface-2: #1B1E24;   /* raised / hover                                  */
@@ -62,7 +63,11 @@
   --surface-2: #F6F4EF;
   --text:      #16181C;
   --text-mid:  #4A4E55;
-  --text-dim:  #6E7279;
+  /* Was #6E7279, inherited from the original site: 3.70:1 on the paper bg,
+     an AA failure on every light-mode label, card CTA and footer line. It was
+     missed because Lighthouse only audits the default (dark) theme. #5E6168
+     measures 4.74:1 on bg, 5.30:1 on surface, 5.64:1 on surface-2. */
+  --text-dim:  #5E6168;
   --accent:    #1E36C8;
   --ok:        #178A55;
   --rule:      rgba(22, 24, 28, 0.16);

@@ -24,6 +24,15 @@ Edit, commit, push. GitHub Pages redeploys in about a minute.
 `.group` and change the title, description and link. Keep the `reveal reveal-up`
 classes — that is what makes it animate in on scroll.
 
+**To switch on the CV button:** upload the CV to Google Drive or Dropbox, set
+sharing to "anyone with the link can view", then in `index.html` find
+`class="btn magnetic cv-link"`, replace `href="#"` with the share link and
+delete the word `hidden`. It stays invisible until you do.
+
+**To update the proof strip:** the four figures under the hero are copied
+from the marketing CV. If the CV changes, change them too — search for
+`class="proof"`.
+
 **To change the colours:** every colour is a variable at the top of `style.css`
 under `:root`. Change it once there and it updates everywhere. Dark is the
 default; the `[data-theme="light"]` block below it holds the light palette.
