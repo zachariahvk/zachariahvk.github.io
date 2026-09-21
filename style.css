@@ -406,7 +406,16 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
    No blur filter — that is what keeps it affordable on mid-range phones. */
 .mesh {
   position: absolute;
-  inset: -20%;
+  /* Sized from the viewport, never from the hero box. With inset:-20% the
+     mesh's position tracked the hero's height, so whenever that height
+     changed — e.g. the headline re-measuring as the webfont swapped in — the
+     mesh moved, and as the largest box on the page it registered as the main
+     layout shift (measured CLS 0.041, attributed to div.mesh). vh, not svh or
+     dvh: vh stays constant while mobile browser chrome shows and hides. */
+  top: -20vh;
+  left: -20vw;
+  width: 140vw;
+  height: 140vh;
   z-index: 0;
   pointer-events: none;
 }
