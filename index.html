@@ -86,7 +86,7 @@
     <div class="wrap">
       <!-- Availability. For a hiring manager this is the most useful sentence on
            the page, so it sits above the headline instead of at the end of About. -->
-      <p class="status"><span class="status-dot" aria-hidden="true"></span>Open to content marketing roles</p>
+      <p class="status"><span class="status-dot" aria-hidden="true"></span>Open to content marketing and sales roles</p>
 
       <h1>
         <span class="line-mask"><span>Content that</span></span>
@@ -107,9 +107,9 @@
       <div class="quickcontact">
         <a class="btn primary magnetic" href="mailto:kurienzach30@gmail.com">Email me</a>
 
-        <!-- CV: set href to your Drive/Dropbox share link, then delete `hidden`.
-             Hidden until then so this branch can never ship a button to nowhere. -->
-        <a class="btn magnetic cv-link" href="#" target="_blank" rel="noopener" hidden>Download CV<span class="visually-hidden"> (opens in a new tab)</span></a>
+        <!-- Jumps to the CV block rather than downloading, because there are two
+             versions. The label says "See", not "Download", to match what happens. -->
+        <a class="btn magnetic" href="#cv">See my CV</a>
 
         <span class="alt-contact">
           or <a href="https://www.linkedin.com/in/zachariahvk/" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
@@ -438,6 +438,26 @@
       <p class="sec-intro reveal reveal-up">
         Happy to walk through any of this work, share the thinking behind it, or talk about a role.
       </p>
+
+      <!-- Two CVs, labelled so the reader picks the relevant one rather than
+           being handed the wrong version. Sizes are stated because these are
+           downloads, and each link says it opens a PDF for screen readers. -->
+      <div class="cv-block" id="cv" data-reveal-group>
+        <h3 class="reveal reveal-fade">CV</h3>
+        <p class="cv-note reveal reveal-up">Two versions, depending on the role you're hiring for.</p>
+        <div class="cv-links">
+          <a class="btn magnetic reveal reveal-up" href="cv/zachariah-kurien-content-marketing-cv.pdf" target="_blank" rel="noopener">
+            Content marketing CV
+            <span class="cv-meta">PDF &middot; 288&nbsp;KB</span>
+            <span class="visually-hidden">(opens a PDF in a new tab)</span>
+          </a>
+          <a class="btn magnetic reveal reveal-up" href="cv/zachariah-kurien-sales-cv.pdf" target="_blank" rel="noopener">
+            Sales CV
+            <span class="cv-meta">PDF &middot; 294&nbsp;KB</span>
+            <span class="visually-hidden">(opens a PDF in a new tab)</span>
+          </a>
+        </div>
+      </div>
 
       <div class="contact-lines" data-reveal-group>
         <a class="contact-line reveal reveal-up" href="mailto:kurienzach30@gmail.com">

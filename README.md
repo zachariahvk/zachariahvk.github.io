@@ -24,10 +24,14 @@ Edit, commit, push. GitHub Pages redeploys in about a minute.
 `.group` and change the title, description and link. Keep the `reveal reveal-up`
 classes — that is what makes it animate in on scroll.
 
-**To switch on the CV button:** upload the CV to Google Drive or Dropbox, set
-sharing to "anyone with the link can view", then in `index.html` find
-`class="btn magnetic cv-link"`, replace `href="#"` with the share link and
-delete the word `hidden`. It stays invisible until you do.
+**To update a CV:** replace the PDF in `cv/` keeping the same filename, then
+commit and push. If the file size changes noticeably, update the `PDF · NNN KB`
+label next to that link in `index.html` (search for `cv-meta`).
+
+Both CVs are public and crawlable at
+`zachariahvk.github.io/cv/<filename>.pdf`. To take one down, delete the file
+**and** its link in `index.html` — removing only the link leaves the PDF
+reachable by direct URL, and search engines may already have indexed it.
 
 **To update the proof strip:** the four figures under the hero are copied
 from the marketing CV. If the CV changes, change them too — search for

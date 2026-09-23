@@ -168,6 +168,11 @@ a { color: var(--accent); text-decoration: none; }
    otherwise override the browser's default [hidden] rule and show anyway. */
 [hidden] { display: none !important; }
 
+/* Anchor targets must clear the fixed top bar. Lenis applies its own offset on
+   desktop, but it is switched off on touch, where the native jump put the CV
+   heading flush against the viewport top and so behind the bar. */
+section[id], #cv, #main { scroll-margin-top: 88px; }
+
 
 /* 3. Layout ================================================================ */
 
@@ -974,6 +979,41 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
 /* 9. Contact =============================================================== */
 
 #contact { padding-bottom: clamp(90px, 12vw, 140px); }
+
+/* CV downloads */
+.cv-block {
+  margin-bottom: clamp(40px, 6vw, 60px);
+  padding-bottom: clamp(36px, 5vw, 52px);
+  border-bottom: 1px solid var(--rule);
+}
+.cv-block h3 {
+  font-family: var(--display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0 0 12px;
+}
+.cv-note { margin: 0 0 22px; color: var(--text-mid); max-width: 48ch; }
+.cv-links { display: flex; flex-wrap: wrap; gap: 12px; }
+.cv-links .btn {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.cv-meta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.cv-links .btn:hover .cv-meta { color: inherit; }
+
+@media (max-width: 480px) {
+  .cv-links { flex-direction: column; align-items: stretch; }
+  .cv-links .btn { justify-content: space-between; }
+}
 
 .contact-lines { margin-top: 36px; border-top: 1px solid var(--rule); }
 
