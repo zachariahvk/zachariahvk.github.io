@@ -84,6 +84,10 @@
     <div class="mesh" aria-hidden="true"><i></i><i></i><i></i></div>
 
     <div class="wrap">
+      <!-- Availability. For a hiring manager this is the most useful sentence on
+           the page, so it sits above the headline instead of at the end of About. -->
+      <p class="status"><span class="status-dot" aria-hidden="true"></span>Open to content marketing and sales roles</p>
+
       <h1>
         <span class="line-mask"><span>Content that</span></span>
         <span class="line-mask"><span>moves product.</span></span>
@@ -94,18 +98,62 @@
       <p class="blurb">
         I spent three years writing product launches, videos and social campaigns for
         <strong>Matrix Comsec</strong>, a security and telecom manufacturer selling into enterprise buyers.
-        Today I'm on the other side of that table — running B2B sales and partnerships at
+        Then I spent a year and a half on the other side of that table — running B2B sales and partnerships at
         <strong>TranZact</strong> in Mumbai. The work below is from the marketing side.
       </p>
 
+      <!-- One primary action. LinkedIn and phone stay, but as quieter links, so
+           the visitor is not asked to choose between three equal buttons. -->
       <div class="quickcontact">
         <a class="btn primary magnetic" href="mailto:kurienzach30@gmail.com">Email me</a>
-        <a class="btn magnetic" href="https://www.linkedin.com/in/zachariahvk/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn magnetic" href="tel:+919537774659">+91 95377 74659</a>
+
+        <!-- Jumps to the CV block rather than downloading, because there are two
+             versions. The label says "See", not "Download", to match what happens. -->
+        <a class="btn magnetic" href="#cv">See my CV</a>
+
+        <span class="alt-contact">
+          or <a href="https://www.linkedin.com/in/zachariahvk/" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+          <span aria-hidden="true">&middot;</span>
+          <a href="tel:+919537774659">+91 95377 74659</a>
+        </span>
       </div>
     </div>
 
     <div class="scroll-cue" aria-hidden="true">Scroll</div>
+  </section>
+
+  <!-- ===================== PROOF =====================
+       Every figure here is taken from the marketing CV. Nothing is estimated
+       or rounded up; if a number changes on the CV, change it here too. -->
+  <section class="proof" aria-label="Track record">
+    <div class="wrap">
+      <ul class="proof-list" data-reveal-group>
+        <li class="reveal reveal-up">
+          <span class="proof-num">5+</span>
+          <span class="proof-label">years of B2B experience</span>
+        </li>
+        <li class="reveal reveal-up">
+          <span class="proof-num">3,000</span>
+          <span class="proof-label">LinkedIn newsletter subscribers on its first run</span>
+        </li>
+        <li class="reveal reveal-up">
+          <span class="proof-num">3+</span>
+          <span class="proof-label">years owning content at Matrix Comsec</span>
+        </li>
+        <li class="reveal reveal-up">
+          <span class="proof-num">Awarded</span>
+          <span class="proof-label">for SEO content that consistently hit traffic targets</span>
+        </li>
+        <li class="reveal reveal-up">
+          <span class="proof-num">0&rarr;4</span>
+          <span class="proof-label">strategic partners built from scratch in Mumbai</span>
+        </li>
+        <li class="reveal reveal-up">
+          <span class="proof-num">77%</span>
+          <span class="proof-label">ROI on B2B sales effort</span>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <!-- ===================== WORK ===================== -->
@@ -299,7 +347,7 @@
 
       <!-- Editorial -->
       <div class="group" data-reveal-group>
-        <h3>Editorial <span class="count">Ongoing</span></h3>
+        <h3>Editorial <span class="count">1 newsletter</span></h3>
 
         <div class="cards">
           <a class="card wide reveal reveal-up" href="https://www.linkedin.com/newsletters/matrixchange-7047132235270959106/" target="_blank" rel="noopener">
@@ -342,7 +390,7 @@
           <p class="reveal reveal-up">
             I came up through content — three years at Matrix Comsec writing launch campaigns, video scripts,
             social and newsletter work for a technical product line. Then I moved into B2B sales at TranZact,
-            where I spend my days on demos, objections and partner conversations.
+            where I spent my days on demos, objections and partner conversations.
           </p>
           <p class="reveal reveal-up">
             That combination is the whole point. I know what a buyer actually asks before they commit, which
@@ -354,13 +402,20 @@
         <div class="roles parallax reveal reveal-up" data-depth="0.05">
           <div class="role">
             <h3>TranZact</h3>
-            <div class="when">Area Sales Executive &amp; Strategic Alliances &middot; Mumbai &middot; 2025&ndash;present</div>
+            <div class="when">Area Sales Executive &amp; Strategic Alliances &middot; Mumbai &middot; 2025&ndash;2026</div>
             <p>B2B sales and partner network development — generating demos and building the regional alliance pipeline.</p>
           </div>
           <div class="role">
             <h3>Matrix Comsec</h3>
             <div class="when">Content Marketing Executive &middot; 2021&ndash;2024</div>
             <p>Owned content for product launches across security and telecom: scripts, campaigns, social and newsletter.</p>
+          </div>
+          <!-- Added from the marketing CV (Nov 2020 - May 2021). Description
+               follows the CV bullet closely; edit freely. -->
+          <div class="role">
+            <h3>RAGNS</h3>
+            <div class="when">Content Writer &middot; 2020&ndash;2021</div>
+            <p>Keyword-optimised website content, written alongside SEO analysts, that improved search rankings.</p>
           </div>
         </div>
       </div>
@@ -391,6 +446,26 @@
       <p class="sec-intro reveal reveal-up">
         Happy to walk through any of this work, share the thinking behind it, or talk about a role.
       </p>
+
+      <!-- Two CVs, labelled so the reader picks the relevant one rather than
+           being handed the wrong version. Sizes are stated because these are
+           downloads, and each link says it opens a PDF for screen readers. -->
+      <div class="cv-block" id="cv" data-reveal-group>
+        <h3 class="reveal reveal-fade">CV</h3>
+        <p class="cv-note reveal reveal-up">Two versions, depending on the role you're hiring for.</p>
+        <div class="cv-links">
+          <a class="btn magnetic reveal reveal-up" href="cv/zachariah-kurien-content-marketing-cv.pdf" target="_blank" rel="noopener">
+            Content marketing CV
+            <span class="cv-meta">PDF &middot; 268&nbsp;KB</span>
+            <span class="visually-hidden">(opens a PDF in a new tab)</span>
+          </a>
+          <a class="btn magnetic reveal reveal-up" href="cv/zachariah-kurien-sales-cv.pdf" target="_blank" rel="noopener">
+            Sales CV
+            <span class="cv-meta">PDF &middot; 294&nbsp;KB</span>
+            <span class="visually-hidden">(opens a PDF in a new tab)</span>
+          </a>
+        </div>
+      </div>
 
       <div class="contact-lines" data-reveal-group>
         <a class="contact-line reveal reveal-up" href="mailto:kurienzach30@gmail.com">

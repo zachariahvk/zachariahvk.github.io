@@ -9,6 +9,7 @@
      4.  Page chrome (progress bar, cursor, intro)
      5.  Top bar
      6.  Hero + ambient background
+     6b. Proof strip
      7.  Work
      8.  About
      9.  Contact
@@ -24,7 +25,8 @@
 /* 1. Tokens ================================================================ */
 
 :root {
-  /* Dark is the default direction. Every pair below is measured AA (>=4.5:1). */
+  /* Dark is the default direction. Every text pair in BOTH themes is measured
+     AA (>=4.5:1) — check the light block too when changing a colour. */
   --bg:        #0B0C0E;   /* page                                            */
   --surface:   #14161A;   /* cards                                           */
   --surface-2: #1B1E24;   /* raised / hover                                  */
@@ -33,6 +35,7 @@
   --text-dim:  #7D818A;   /*  5.01:1 — still AA, so it can carry real text   */
   --accent:    #6E8BFF;   /*  6.34:1 — their #1E36C8 opened up for dark      */
   --accent-deep: #1E36C8; /* original brand blue, kept for light mode        */
+  --ok:        #3DD68C;   /* availability dot only — decorative, never text  */
   --rule:      rgba(242, 240, 234, 0.10);
   --rule-soft: rgba(242, 240, 234, 0.06);
   --on-accent: #0B0C0E;
@@ -60,8 +63,13 @@
   --surface-2: #F6F4EF;
   --text:      #16181C;
   --text-mid:  #4A4E55;
-  --text-dim:  #6E7279;
+  /* Was #6E7279, inherited from the original site: 3.70:1 on the paper bg,
+     an AA failure on every light-mode label, card CTA and footer line. It was
+     missed because Lighthouse only audits the default (dark) theme. #5E6168
+     measures 4.74:1 on bg, 5.30:1 on surface, 5.64:1 on surface-2. */
+  --text-dim:  #5E6168;
   --accent:    #1E36C8;
+  --ok:        #178A55;
   --rule:      rgba(22, 24, 28, 0.16);
   --rule-soft: rgba(22, 24, 28, 0.09);
   --on-accent: #E4E1D8;
@@ -155,6 +163,15 @@ a { color: var(--accent); text-decoration: none; }
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* Any component that sets its own `display` (e.g. .btn is inline-block) would
+   otherwise override the browser's default [hidden] rule and show anyway. */
+[hidden] { display: none !important; }
+
+/* Anchor targets must clear the fixed top bar. Lenis applies its own offset on
+   desktop, but it is switched off on touch, where the native jump put the CV
+   heading flush against the viewport top and so behind the bar. */
+section[id], #cv, #main { scroll-margin-top: 88px; }
 
 
 /* 3. Layout ================================================================ */
@@ -394,7 +411,16 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
    No blur filter — that is what keeps it affordable on mid-range phones. */
 .mesh {
   position: absolute;
-  inset: -20%;
+  /* Sized from the viewport, never from the hero box. With inset:-20% the
+     mesh's position tracked the hero's height, so whenever that height
+     changed — e.g. the headline re-measuring as the webfont swapped in — the
+     mesh moved, and as the largest box on the page it registered as the main
+     layout shift (measured CLS 0.041, attributed to div.mesh). vh, not svh or
+     dvh: vh stays constant while mobile browser chrome shows and hides. */
+  top: -20vh;
+  left: -20vw;
+  width: 140vw;
+  height: 140vh;
   z-index: 0;
   pointer-events: none;
 }
@@ -457,6 +483,44 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
 }
 
 .hero .wrap { position: relative; z-index: 2; }
+
+/* Availability line. The green dot is decorative — the words carry the
+   meaning, so it passes for colour-blind readers and screen readers alike. */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 30px;
+  padding: 7px 15px 7px 12px;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-mid);
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.status-dot {
+  position: relative;
+  flex: none;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+/* Soft ping — transform + opacity only. */
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--ok);
+  animation: ping 2.4s var(--ease) infinite;
+}
+@keyframes ping {
+  0%       { transform: scale(1);   opacity: 0.55; }
+  80%, to  { transform: scale(2.8); opacity: 0; }
+}
 
 .hero h1 {
   font-family: var(--display);
@@ -527,6 +591,35 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
   color: var(--bg);
 }
 
+/* Secondary contact routes — present, but visibly not the main ask. */
+.alt-contact {
+  align-self: center;
+  margin-left: 8px;
+  font-family: var(--display);
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.alt-contact a {
+  position: relative;
+  display: inline-block;
+  padding: 5px 0;            /* comfortable tap target without looking like a button */
+  color: var(--text-mid);
+  transition: color var(--dur-fast) var(--ease);
+}
+.alt-contact a:hover { color: var(--accent); }
+.alt-contact a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--dur-fast) var(--ease);
+}
+.alt-contact a:hover::after,
+.alt-contact a:focus-visible::after { transform: scaleX(1); }
+
 /* Scroll cue */
 .scroll-cue {
   position: absolute;
@@ -554,6 +647,67 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
 @keyframes cue {
   0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
   50%      { transform: scaleY(1);   opacity: 1; }
+}
+
+
+/* 6b. Proof strip ========================================================== */
+
+/* A compact band, not a full section — it should read in one glance on the
+   way from the headline to the work. Numbers are static on purpose: a
+   count-up would animate text, which breaks the transform/opacity rule. */
+.proof {
+  padding: clamp(34px, 5vw, 50px) 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+}
+
+.proof-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* Six figures: 3x2 on desktop, 2x3 on smaller screens.
+     minmax(0, 1fr), not 1fr: plain 1fr lets the widest word ("Awarded") grow
+     its column, which left the grid lopsided (83px vs 137px) on small phones. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px 28px;
+}
+
+.proof-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 20px;
+  border-left: 1px solid var(--rule);
+}
+.proof-list li:first-child { border-left-color: var(--accent); }
+
+.proof-num {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.proof-label {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-mid);
+  max-width: 24ch;
+}
+
+@media (max-width: 860px) {
+  .proof-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 18px; }
+}
+
+/* With columns now fixed-equal, the longest figure has to fit its share. */
+@media (max-width: 400px) {
+  .proof-list li { padding-left: 16px; }
+  .proof-num { font-size: clamp(1.45rem, 7.2vw, 1.9rem); }
 }
 
 
@@ -826,6 +980,41 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
 /* 9. Contact =============================================================== */
 
 #contact { padding-bottom: clamp(90px, 12vw, 140px); }
+
+/* CV downloads */
+.cv-block {
+  margin-bottom: clamp(40px, 6vw, 60px);
+  padding-bottom: clamp(36px, 5vw, 52px);
+  border-bottom: 1px solid var(--rule);
+}
+.cv-block h3 {
+  font-family: var(--display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0 0 12px;
+}
+.cv-note { margin: 0 0 22px; color: var(--text-mid); max-width: 48ch; }
+.cv-links { display: flex; flex-wrap: wrap; gap: 12px; }
+.cv-links .btn {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.cv-meta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.cv-links .btn:hover .cv-meta { color: inherit; }
+
+@media (max-width: 480px) {
+  .cv-links { flex-direction: column; align-items: stretch; }
+  .cv-links .btn { justify-content: space-between; }
+}
 
 .contact-lines { margin-top: 36px; border-top: 1px solid var(--rule); }
 
