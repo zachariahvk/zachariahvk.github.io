@@ -28,10 +28,12 @@ classes — that is what makes it animate in on scroll.
 commit and push. If the file size changes noticeably, update the `PDF · NNN KB`
 label next to that link in `index.html` (search for `cv-meta`).
 
-Both CVs are public and crawlable at
-`zachariahvk.github.io/cv/<filename>.pdf`. To take one down, delete the file
-**and** its link in `index.html` — removing only the link leaves the PDF
-reachable by direct URL, and search engines may already have indexed it.
+The site carries one CV, the content marketing one, public and crawlable at
+`zachariahvk.github.io/cv/zachariah-kurien-content-marketing-cv.pdf`. It is
+linked twice in `index.html`: the "See my CV" button in the hero and the CV
+block in Contact. To take it down, delete the file **and** both links —
+removing only the links leaves the PDF reachable by direct URL, and search
+engines may already have indexed it. The sales CV was removed on 28 Sep 2026.
 
 **To update the proof strip:** the four figures under the hero are copied
 from the marketing CV. If the CV changes, change them too — search for
