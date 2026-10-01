@@ -12,6 +12,7 @@
      6b. Proof strip
      7.  Work
      8.  About
+     8b. AI section
      9.  Contact
      10. Footer
      11. Motion primitives
@@ -977,6 +978,68 @@ section { padding: clamp(72px, 11vw, 132px) 0; position: relative; }
 }
 
 
+/* 8b. AI section ===========================================================
+   Reuses .about-grid and the .roles panel so this reads as part of the same
+   system rather than a bolt-on. Only the panel internals are new. */
+
+.panel-head {
+  font-family: var(--display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0 0 16px;
+}
+
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.chips li {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  padding: 8px 13px;
+  border-radius: 2px;
+  color: var(--text-mid);
+}
+
+.ai-stats {
+  margin: 26px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule-soft);
+  display: grid;
+  gap: 16px;
+}
+.ai-stats > div {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.ai-stats dt {
+  flex: none;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.ai-stats dd {
+  margin: 0;
+  color: var(--text-mid);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+
 /* 9. Contact =============================================================== */
 
 #contact { padding-bottom: clamp(90px, 12vw, 140px); }
@@ -1152,6 +1215,15 @@ html.js .reveal-fade { transform: none; }
   .about-body p.lede { padding-left: 18px; }
   .scroll-cue { display: none; }
   .pagefoot .wrap { flex-direction: column; align-items: flex-start; }
+}
+
+/* The AI link is the one nav item that does not fit. Measured intrinsic widths
+   put the bar at roughly 393px with it against 364px without, so on a 375px
+   phone it pushes the bar past the viewport. Work/About/Contact are primary
+   destinations and stay; the AI section is still reached by scrolling, since
+   it sits directly after Work. */
+@media (max-width: 480px) {
+  .topbar nav a[href="#ai"] { display: none; }
 }
 
 /* Squeeze the bar rather than dropping a nav item — losing "About" on small
